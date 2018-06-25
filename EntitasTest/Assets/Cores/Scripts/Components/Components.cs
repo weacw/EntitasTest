@@ -68,8 +68,9 @@ public class PlayerPropertiesComponent : IComponent
 [Game]
 public class PlayerUnityComponent : IComponent
 {
-    public CapsuleCollider capsuleCollider;
-    public Rigidbody rigidbody;
+    public CharacterController characterController;
+    //public CapsuleCollider capsuleCollider;
+    //public Rigidbody rigidbody;
     public Animator animator;
     public Transform transform;
 }

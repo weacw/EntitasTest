@@ -19,7 +19,7 @@ public class TransparentService : IPhysicsRaycast
     private Dictionary<Renderer, TransparentParam> transparentDic = new Dictionary<Renderer, TransparentParam>();
     private List<Renderer> clearList = new List<Renderer>();
 
-    public TransparentService(Transform _targetObject, Transform _camerTrans, float _destTransparent = .2f, float _fadeInTime = 1f, int _transparentLayer = ~(1 << 10))
+    public TransparentService(Transform _targetObject, Transform _camerTrans, float _destTransparent = .2f, float _fadeInTime = .5f, int _transparentLayer = ~(1 << 10))
     {
         targetObject = _targetObject;
         cameraTransform = _camerTrans;
@@ -32,7 +32,7 @@ public class TransparentService : IPhysicsRaycast
     {
         UpdateTransparentObject();
         RaycastHit[] rayHits = null;
-        Vector3 targetPos = targetObject.position + Vector3.up * 3;
+        Vector3 targetPos = targetObject.position + Vector3.up *1.5f;
         Vector3 viewDir = (targetPos - cameraTransform.position).normalized;
         Vector3 oriPos = cameraTransform.position;
         float distance = Vector3.Distance(oriPos, targetPos);

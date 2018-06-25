@@ -32,8 +32,9 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
         entity.AddMovement(Vector2.zero);
         entity.AddPlayerProperties(5, 5, 30,LayerMask.GetMask("Player"),PlayerState.None);
         entity.AddPlayerUnity(
-            entity.player.character.GetComponent<CapsuleCollider>(),
-            entity.player.character.GetComponent<Rigidbody>(),
+            //entity.player.character.GetComponent<CapsuleCollider>(),
+            //entity.player.character.GetComponent<Rigidbody>(),
+            entity.player.character.GetComponent<CharacterController>(),
             entity.player.character.GetComponentInChildren<Animator>(),
             entity.player.character.transform);
     }

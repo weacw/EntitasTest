@@ -11,21 +11,19 @@ public partial class GameEntity {
     public PlayerUnityComponent playerUnity { get { return (PlayerUnityComponent)GetComponent(GameComponentsLookup.PlayerUnity); } }
     public bool hasPlayerUnity { get { return HasComponent(GameComponentsLookup.PlayerUnity); } }
 
-    public void AddPlayerUnity(UnityEngine.CapsuleCollider newCapsuleCollider, UnityEngine.Rigidbody newRigidbody, UnityEngine.Animator newAnimator, UnityEngine.Transform newTransform) {
+    public void AddPlayerUnity(UnityEngine.CharacterController newCharacterController, UnityEngine.Animator newAnimator, UnityEngine.Transform newTransform) {
         var index = GameComponentsLookup.PlayerUnity;
         var component = CreateComponent<PlayerUnityComponent>(index);
-        component.capsuleCollider = newCapsuleCollider;
-        component.rigidbody = newRigidbody;
+        component.characterController = newCharacterController;
         component.animator = newAnimator;
         component.transform = newTransform;
         AddComponent(index, component);
     }
 
-    public void ReplacePlayerUnity(UnityEngine.CapsuleCollider newCapsuleCollider, UnityEngine.Rigidbody newRigidbody, UnityEngine.Animator newAnimator, UnityEngine.Transform newTransform) {
+    public void ReplacePlayerUnity(UnityEngine.CharacterController newCharacterController, UnityEngine.Animator newAnimator, UnityEngine.Transform newTransform) {
         var index = GameComponentsLookup.PlayerUnity;
         var component = CreateComponent<PlayerUnityComponent>(index);
-        component.capsuleCollider = newCapsuleCollider;
-        component.rigidbody = newRigidbody;
+        component.characterController = newCharacterController;
         component.animator = newAnimator;
         component.transform = newTransform;
         ReplaceComponent(index, component);
