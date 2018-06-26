@@ -8,17 +8,15 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
 {
     private Contexts m_Context;
     private GameEntity entity;
-    private Systems systems;
+    //private Systems systems;
 
 
     [SerializeField] private Image m_JoystickBackground;
     [SerializeField] private Image m_JoystickHandler;
     private void Awake()
     {
-
-
         m_Context = Contexts.sharedInstance;
-        systems = new Feature("Joystick System").Add(new JoystickSystem(m_Context)).Add(new PlayerFeatures(m_Context));
+        //systems = new Feature("Joystick System").Add(new JoystickSystem(m_Context)).Add(new PlayerFeatures(m_Context));
 
 
         entity = m_Context.game.CreateEntity();
@@ -30,13 +28,12 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
 
         entity.AddPlayer(GameObject.Find("Cube"));
         entity.AddMovement(Vector2.zero);
-        entity.AddPlayerProperties(5, 5, 30,LayerMask.GetMask("Player"),PlayerState.None);
+        entity.AddPlayerProperties(5, 5, 30, LayerMask.GetMask("Player"), PlayerState.None);
         entity.AddPlayerUnity(
-            //entity.player.character.GetComponent<CapsuleCollider>(),
-            //entity.player.character.GetComponent<Rigidbody>(),
             entity.player.character.GetComponent<CharacterController>(),
             entity.player.character.GetComponentInChildren<Animator>(),
             entity.player.character.transform);
+        entity.AddWeapon(new RifleWeapon(), false,false, "M4", null);
     }
 
 
@@ -58,7 +55,7 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
     {
         entity.ReplaceJoyStickPointerData(eventData);
         entity.ReplaceJoyStickState(JoystickStateType.OnUp);
-        systems.Execute();
+        //systems.Execute();
     }
 
     private void OperaterPointerComponent(PointerEventData eventData)
@@ -73,8 +70,8 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
         }
     }
 
-    private void Update()
-    {
-        systems.Execute();
-    }
+    //private void Update()
+    //{
+    //    systems.Execute();
+    //}
 }

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly PhysicsRaycastComponent physicsRaycastComponent = new PhysicsRaycastComponent();
+    public PhysicsRaycastComponent physicsRaycast { get { return (PhysicsRaycastComponent)GetComponent(GameComponentsLookup.PhysicsRaycast); } }
+    public bool hasPhysicsRaycast { get { return HasComponent(GameComponentsLookup.PhysicsRaycast); } }
 
-    public bool isPhysicsRaycast {
-        get { return HasComponent(GameComponentsLookup.PhysicsRaycast); }
-        set {
-            if (value != isPhysicsRaycast) {
-                var index = GameComponentsLookup.PhysicsRaycast;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : physicsRaycastComponent;
+    public void AddPhysicsRaycast(IPhysicsRaycast newPhysicsRaycast) {
+        var index = GameComponentsLookup.PhysicsRaycast;
+        var component = CreateComponent<PhysicsRaycastComponent>(index);
+        component.physicsRaycast = newPhysicsRaycast;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplacePhysicsRaycast(IPhysicsRaycast newPhysicsRaycast) {
+        var index = GameComponentsLookup.PhysicsRaycast;
+        var component = CreateComponent<PhysicsRaycastComponent>(index);
+        component.physicsRaycast = newPhysicsRaycast;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemovePhysicsRaycast() {
+        RemoveComponent(GameComponentsLookup.PhysicsRaycast);
     }
 }
 

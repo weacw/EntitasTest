@@ -21,8 +21,10 @@ public static class GameComponentsLookup {
     public const int Player = 10;
     public const int PlayerProperties = 11;
     public const int PlayerUnity = 12;
+    public const int Weapon = 13;
+    public const int WeaponInventory = 14;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "Camera",
@@ -37,7 +39,9 @@ public static class GameComponentsLookup {
         "PhysicsRaycast",
         "Player",
         "PlayerProperties",
-        "PlayerUnity"
+        "PlayerUnity",
+        "Weapon",
+        "WeaponInventory"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -53,6 +57,8 @@ public static class GameComponentsLookup {
         typeof(PhysicsRaycastComponent),
         typeof(PlayerComponent),
         typeof(PlayerPropertiesComponent),
-        typeof(PlayerUnityComponent)
+        typeof(PlayerUnityComponent),
+        typeof(WeaponComponent),
+        typeof(WeaponInventoryComponent)
     };
 }

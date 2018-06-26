@@ -5,12 +5,17 @@ using Entitas;
 public class Controller : MonoBehaviour
 {
     Systems systems;
-    Contexts contexts;
+    Contexts m_Context;
     // Use this for initialization
     void Start()
     {
-        contexts = Contexts.sharedInstance;
-        systems = new Feature("Camera System").Add(new CameraFeature(contexts));
+        m_Context = Contexts.sharedInstance;
+        systems = new Feature("Operater Systems")
+            .Add(new InventoryFeature(m_Context))
+            .Add(new CameraFeature(m_Context))
+            .Add(new JoystickSystem(m_Context))
+            .Add(new PlayerFeatures(m_Context));
+        systems.Initialize();
     }
 
     // Update is called once per frame

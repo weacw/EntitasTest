@@ -3,6 +3,7 @@ using Entitas.CodeGeneration.Attributes;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
+#region Joystick Components
 public enum JoystickStateType
 {
     None,
@@ -10,14 +11,6 @@ public enum JoystickStateType
     OnUp,
     OnDown
 };
-
-public enum PlayerState
-{
-    None,
-    OnGround,
-    OnAir
-};
-
 
 [Game]
 public class JoyStickComponent : IComponent { }
@@ -45,6 +38,17 @@ public class JoyStickDirectionComponent : IComponent
     public Vector2 joystickHandlerDirection;
 }
 
+#endregion
+
+
+#region Player Components
+public enum PlayerState
+{
+    None,
+    OnGround,
+    OnAir
+};
+
 [Game]
 public class PlayerComponent : IComponent
 {
@@ -69,11 +73,14 @@ public class PlayerPropertiesComponent : IComponent
 public class PlayerUnityComponent : IComponent
 {
     public CharacterController characterController;
-    //public CapsuleCollider capsuleCollider;
-    //public Rigidbody rigidbody;
     public Animator animator;
     public Transform transform;
 }
+
+#endregion
+
+
+#region Camera Components
 
 [Game]
 public class CameraTransComponent : IComponent
@@ -92,8 +99,51 @@ public class CameraPropertiesComponent : IComponent
 [Game]
 public class CameraComponent : IComponent { }
 
+#endregion
+
+
+#region Physics Components
 [Game]
 public class PhysicsRaycastComponent : IComponent
 {
-    IPhysicsRaycast physicsRaycast;
+    public IPhysicsRaycast physicsRaycast;
 }
+#endregion
+
+
+#region Weapon Components
+[Game]
+public class WeaponComponent : IComponent
+{
+    public IWeapon weapon;
+    public bool shot;
+    public bool reload;
+    public string mainWeaponId;
+    public string secondWeaponId;
+}
+
+[Game, Unique]
+public class WeaponInventoryComponent : IComponent
+{
+    public WeaponInventory weaponInventory;
+}
+
+
+
+[System.Serializable]
+public class WeaponProperties
+{
+    public int curAmmunition = 30;
+    public int maxAmmunition = 30;
+    public int carryAmmunition = 120;
+    public float fireRate=0.086f;
+    public float bulletSpeed;
+    public float injure;
+}
+[System.Serializable]
+public class Weapon
+{
+    public string weaponId;
+    public GameObject prefab;
+}
+#endregion
