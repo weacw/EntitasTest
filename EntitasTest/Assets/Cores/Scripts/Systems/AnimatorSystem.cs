@@ -14,6 +14,7 @@ public class AnimatorSystem : ReactiveSystem<GameEntity>
         foreach (GameEntity entity in entities)
         {
             entity.playerUnity.animator.SetFloat("MovementAmount", entity.joyStickDirection.joystickHandlerDirection.magnitude);
+            entity.playerUnity.animator.SetBool("Shoot", entity.weaponState.shot);
         }
     }
 
@@ -24,6 +25,6 @@ public class AnimatorSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.JoyStickState, GameMatcher.PlayerUnity, GameMatcher.JoyStickDirection));
+        return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.JoyStickState, GameMatcher.WeaponState));
     }
 }

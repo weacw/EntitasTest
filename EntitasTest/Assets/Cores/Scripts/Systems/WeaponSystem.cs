@@ -16,28 +16,29 @@ public class WeaponSystem : IInitializeSystem, IExecuteSystem
         var entities = contexts.game.GetEntities(GameMatcher.Weapon);
         foreach (GameEntity entity in entities)
         {
-            if (entity.weapon.shot)
+            if (entity.weaponState.shot)
             {
                 entity.weapon.weapon.Shot();
-                entity.weapon.shot = false;
+                entity.weaponState.shot = false;
             }
 
-            if (entity.weapon.reload)
+            if (entity.weaponState.reload)
             {
                 entity.weapon.weapon.Reload();
-                entity.weapon.reload = false;
+                entity.weaponState.reload = false;
             }
         }
     }
 
     public void Initialize()
     {
-        var weaponInventoryEntity = contexts.game.GetEntities(GameMatcher.WeaponInventory).SingleEntity<GameEntity>();
+        var weaponInventoryEntity = contexts.game.GetEntities(GameMatcher.WeaponInventory).SingleEntity<GameEntity>();        
         var entities = contexts.game.GetEntities(GameMatcher.Weapon);
         foreach (GameEntity entity in entities)
         {
             Transform tmp_RightHand = entity.playerUnity.animator.GetBoneTransform(HumanBodyBones.RightHand);
-            int id = weaponInventoryEntity.weaponInventory.weaponInventory.GetWeaponForId("M4");
+            string tmp_WeaponId = entity.weaponSlots.mainWeaponId;
+            int id = weaponInventoryEntity.weaponInventory.weaponInventory.GetWeaponForId(tmp_WeaponId);
             entity.weapon.weapon.Init(weaponInventoryEntity.weaponInventory.weaponInventory.m_Weapons[id], tmp_RightHand);
 
         }

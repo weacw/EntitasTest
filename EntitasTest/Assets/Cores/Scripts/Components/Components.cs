@@ -116,8 +116,17 @@ public class PhysicsRaycastComponent : IComponent
 public class WeaponComponent : IComponent
 {
     public IWeapon weapon;
+}
+[Game]
+public class WeaponStateComponent : IComponent
+{
     public bool shot;
     public bool reload;
+}
+
+[Game]
+public class WeaponSlotsComponent : IComponent
+{
     public string mainWeaponId;
     public string secondWeaponId;
 }
@@ -136,7 +145,7 @@ public class WeaponProperties
     public int curAmmunition = 30;
     public int maxAmmunition = 30;
     public int carryAmmunition = 120;
-    public float fireRate=0.086f;
+    public float fireRate = 0.086f;
     public float bulletSpeed;
     public float injure;
 }

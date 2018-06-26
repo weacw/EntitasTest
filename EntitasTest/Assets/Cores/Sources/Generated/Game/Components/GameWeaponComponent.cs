@@ -11,25 +11,17 @@ public partial class GameEntity {
     public WeaponComponent weapon { get { return (WeaponComponent)GetComponent(GameComponentsLookup.Weapon); } }
     public bool hasWeapon { get { return HasComponent(GameComponentsLookup.Weapon); } }
 
-    public void AddWeapon(IWeapon newWeapon, bool newShot, bool newReload, string newMainWeaponId, string newSecondWeaponId) {
+    public void AddWeapon(IWeapon newWeapon) {
         var index = GameComponentsLookup.Weapon;
         var component = CreateComponent<WeaponComponent>(index);
         component.weapon = newWeapon;
-        component.shot = newShot;
-        component.reload = newReload;
-        component.mainWeaponId = newMainWeaponId;
-        component.secondWeaponId = newSecondWeaponId;
         AddComponent(index, component);
     }
 
-    public void ReplaceWeapon(IWeapon newWeapon, bool newShot, bool newReload, string newMainWeaponId, string newSecondWeaponId) {
+    public void ReplaceWeapon(IWeapon newWeapon) {
         var index = GameComponentsLookup.Weapon;
         var component = CreateComponent<WeaponComponent>(index);
         component.weapon = newWeapon;
-        component.shot = newShot;
-        component.reload = newReload;
-        component.mainWeaponId = newMainWeaponId;
-        component.secondWeaponId = newSecondWeaponId;
         ReplaceComponent(index, component);
     }
 
