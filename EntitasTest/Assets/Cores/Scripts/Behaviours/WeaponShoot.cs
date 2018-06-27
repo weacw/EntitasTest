@@ -16,17 +16,22 @@ public class WeaponShoot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void Update()
     {
         if (pressing)
-            foreach (GameEntity item in entities)
-            {
-                item.weapon.shot = true;
-            }
+            Shootting(true);
+    }
+
+    private void Shootting(bool _state)
+    {
+        foreach (GameEntity item in entities)
+        {
+            item.ReplaceWeaponState(_state, false);
+        }
     }
 
     public void Reload()
     {
         foreach (GameEntity item in entities)
         {
-            item.weapon.reload = true;
+            item.ReplaceWeaponState(false, true);
         }
     }
 
@@ -38,5 +43,6 @@ public class WeaponShoot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         pressing = false;
+        Shootting(false);
     }
 }

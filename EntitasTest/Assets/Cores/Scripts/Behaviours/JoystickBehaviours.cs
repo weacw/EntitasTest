@@ -27,13 +27,14 @@ public class JoystickBehaviours : MonoBehaviour, IPointerDownHandler, IPointerUp
         entity.isJoyStick = true;
 
         entity.AddPlayer(GameObject.Find("Cube"));
-        entity.AddMovement(Vector2.zero);
         entity.AddPlayerProperties(5, 5, 30, LayerMask.GetMask("Player"), PlayerState.None);
         entity.AddPlayerUnity(
             entity.player.character.GetComponent<CharacterController>(),
             entity.player.character.GetComponentInChildren<Animator>(),
             entity.player.character.transform);
-        entity.AddWeapon(new RifleWeapon(), false,false, "M4", null);
+        entity.AddWeapon(new RifleWeapon());
+        entity.AddWeaponState(false, false);
+        entity.AddWeaponSlots("AK47", "M4");
     }
 
 
